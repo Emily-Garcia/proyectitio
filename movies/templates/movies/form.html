@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear pelicula</title>
+</head>
+<body>
+    <form action="/movies/create/" method="POST">
+        {% csrf_token %}
+        <label for="title">Ingresa el titulo:</label> <br>
+        <input type="text" id="title" name="title" placeholder="The Hunger Games"> <br>
+        <label for="sinopsis">Ingresa la sinopsis:</label> <br>
+        <textarea type="text" id="sinopsis" name="sinopsis" placeholder="Textito"></textarea> <br>
+        <label for="duration">Ingresa la duracion en minutos:</label> <br>
+        <input type="number" id="duration" name="duration" placeholder="120"> <br>
+        <label for="calif">Ingresa la calificacion del cero al cinco:</label> <br>
+        <input type="number" id="calif" name="calif" placeholder="5"> <br>
+        <label for="gender">Ingresa el genero:</label> <br>
+        <input type="text" id="gender" name="gender" placeholder="Accion"> <br>
+        <input type="submit" value="Crear pelicula">
+    </form>
+</body>
+</html>
