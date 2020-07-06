@@ -12,3 +12,11 @@ def GetUsers(request):
         'usuarios': users
     }
     return render(request, template_name, context)
+
+def GetUser(request, id):
+    user = User.objects.get(id=id)
+    template_name = 'users/detail.html'
+    context = {
+        'user': user
+    }
+    return render(request, template_name, context)

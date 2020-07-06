@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Usuario: {{user.first_name}} {{user.last_name}}</h1>
+<img src="{{user.profile.image.url}}" alt="Imagen del usuario" width="50" height="50">
+<p>Email: <b>{{user.email}}</b></p>
+<p>Nombre de usuario <b>{{user.username}}</b></p>
+<p>Genero: <b>{{user.profile.gender}}</b></p>
+<p>Edad: <b>{{user.profile.age}}</b></p>
+<p>Telefono: <b>{{user.profile.phone}}</b></p>
+{% endblock content %}
