@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if id %}
+        <h1>Editar usuario</h1>
+        <form action="{% url 'users:detail' id %}" method="POST" enctype="multipart/form_data">
+            {% csrf_token %}
+            {{user_form.as_p}}
+            {{profile_form.as_p}}
+            <img src="{{ image.url }}" alt="Imagen del usuario">
+            <input type="submit" value="Guardar Cambios">
+        </form>
+    {% else %}
+        <h1>Crea un nuevo usuario</h1>
+        <form action="{% url 'users:create' %}" method="POST" enctype="multipart/form_data">
+            {% csrf_token %}
+            {{user_form.as_p}}
+            {{profile_form.as_p}}
+            <input type="submit" value="Crear usuario">
+        </form>
+    {% endif %}
+    
+{% endblock content %}
