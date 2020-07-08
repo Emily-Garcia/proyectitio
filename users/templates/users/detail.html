@@ -2,7 +2,12 @@
 
 {% block content %}
 <h1>Usuario: {{user.first_name}} {{user.last_name}}</h1>
-<img src="{{user.profile.image.url}}" alt="Imagen del usuario" width="50" height="50">
+{% if user.profile.image %}
+    <img src="{{user.profile.image.url}}" alt="Imagen del usuario" width="50" height="50">
+{% else %}
+    <img src="https://www.softzone.es/app/uploads-softzone.es/2018/04/guest.png" alt="Imagen del usuario" width="50" height="50">
+{% endif %}
+
 <p>Email: <b>{{user.email}}</b></p>
 <p>Nombre de usuario <b>{{user.username}}</b></p>
 <p>Genero: <b>{{user.profile.gender}}</b></p>

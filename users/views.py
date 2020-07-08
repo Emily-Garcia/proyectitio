@@ -4,7 +4,10 @@ from django.shortcuts import render, redirect
 
 from django.contrib.auth.models import User
 from django import views
+from django.contrib import messages
 from .forms import UserUpdateform, Profileform, UserCreateform
+
+
 def GetUsers(request):
     users = User.objects.filter(is_superuser=False)
     print(users)
@@ -43,6 +46,7 @@ class CreateUser(views.View):
             profile = profile_form.save(commit=False)
             profile.user = user
             profile.save()
+            messages.success(request, 'Usuario creado con exito!')
             return redirect('users:detail', user.id)
         else:
             template_name = 'users/form.html'
@@ -50,6 +54,7 @@ class CreateUser(views.View):
                 'user_form': user_form,
                 'profile_form': profile_form
             }
+            messages.error(request, 'Algo fallo :0')
             return render(request, template_name, context)
 
 class UpdateUser(views.View):
@@ -73,6 +78,7 @@ class UpdateUser(views.View):
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             profile = profile_form.save()
+            messages.success(request, 'Usuario editado con exito! :)')
             return redirect('users:detail', user.id)
         else:
             template_name = 'users/form.html'
@@ -82,9 +88,11 @@ class UpdateUser(views.View):
                 'id': id,
                 'image': user.profile.image
             }
-            return redirect(request, template_name, context)
+            messages.error(request, 'No se pudo editar el usuario :(')
+            return render(request, template_name, context)
 
 def DeleteUser(request, id):
     user = User.objects.get(pk=id)
     user.delete()
+    messages.success(request, 'Usuario eliminado con exito! :)')
     return redirect('users:list')
