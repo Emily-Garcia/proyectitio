@@ -13,6 +13,17 @@
 <p>Genero: <b>{{user.profile.gender}}</b></p>
 <p>Edad: <b>{{user.profile.age}}</b></p>
 <p>Telefono: <b>{{user.profile.phone}}</b></p>
+<h2>Direcciones del usuario</h2>
+{% if user.adresses.all|length > 0 %}
+        {% for address in user.adresses.all %}
+            <a href="{% url 'addresses:detail' address.id %}">
+                <p>{{ address.street }}, {{ address.city }} - {{address.postal_code}}</p>
+            </a>
+        {% endfor %}
+    {% else %}
+        <h3>Ups! Aún no cuentas con direcciones registradas</h3>
+    {% endif %}
+
 <a href="{% url 'users:update' user.id %}">Editar usuario</a>
 <a href="{% url 'users:delete' user.id %}">Eliminar usuario</a>
 {% endblock content %}
